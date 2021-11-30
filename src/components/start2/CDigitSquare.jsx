@@ -8,9 +8,12 @@ class DigitSquare extends React.Component {
     }
 
     increaseNumber = ()=>{
-        this.setState({
+        // this.setState({
+        //     number: this.state.number+1
+        // })
+        this.setState(state => ({
             number: this.state.number+1
-        })
+        }));
     }
     render() {
         return (

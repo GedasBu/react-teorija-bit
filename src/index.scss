@@ -1,16 +1,22 @@
-@import 'button'; 
+@import "button";
+@import "domino";
+$d_green: #CEE5D0;
+$d_light: #F3F0D7;
+$d_brown: #E0C097;
+$d_red: #FF7878;
+
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 .App {
@@ -19,15 +25,22 @@ code {
   align-items: center;
   width: 100vw;
   min-height: 100vh;
+  &.col {
+      flex-direction: column;
+      &.top {
+          justify-content: flex-start;
+      }
+  }
 }
+
 .border {
   border: solid 3px black;
   padding: 10px;
 }
 
-.big-blue{
+.big-blue {
   display: flex;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
   min-width: 100px;
   min-height: 100px;
   max-width: 300px;
@@ -36,36 +49,125 @@ code {
   border: 3px dotted blue;
   padding: 30px;
   margin: 10px;
-  &_button{
+  &.big {
+    max-width: 1400px;
+}
+  &_button {
     width: 100%;
     display: flex;
     justify-content: center;
-  align-items: center;
-  padding: 5px;
+    align-items: center;
+    padding: 5px;
   }
-  &_small{
+  &_small {
     min-width: 100px;
     min-height: 100px;
     border: 3px solid grey;
     margin: 5px;
-     display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-        &_digit{
-        border: 1px solid pink;
-         padding: 5px;
-        color: pink;
+    &_digit {
+      border: 1px solid pink;
+      padding: 5px;
+      color: pink;
+    }
   }
+  &__book {
+    width: 200px;
+    height: 300px;
+    border: 3px solid powderblue;
+    margin: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    small {
+      height: 50px;
+      color: crimson;
+      overflow: hidden;
+      padding: 5px;
+      font-size: 12px;
+    }
   }
-
 }
 
+.m-3 {
+  margin: 30px;
+}
 
-
-
-
-
-
-
-
-
+.nice-border {
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid paleturquoise;
+  display: inline-block;
+  cursor: pointer;
+  &:hover {
+      border-color: pink;
+  }
+  span {
+      margin: 0;
+  }
+}
+.domino {
+  &__wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      // max-width: 980px;
+      width: 100%;
+  }
+  &__header {
+      height: 55px;
+      background-color: $d_light;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h1 {
+          color: $d_red;
+          font-size: 40px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          margin: 0 40px;
+      }
+  }
+  &__create {
+      background-color: $d_light;
+      width: 100%;
+      border-top: 2px solid $d_brown;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      &__domino {
+          padding: 11px;
+      }
+      &__selects {
+          select {
+              margin: 0 13px;
+              outline: none;
+              border: 2px solid $d_green;
+              font-size: 26px;
+              border-radius: 4px;
+          }
+      }
+      h2 {
+          margin: 0;
+          color: $d_green;
+      }
+  }
+  &__bag {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+      background-color: $d_brown;
+      .plate {
+          margin: 14px;
+      }
+  }
+}
