@@ -10,6 +10,22 @@ function App() {
   const[updated, setUpdated] = useState(Date.now())
   const [showEdit,setShowEdit] = useState({})
 
+/////////SORTS AND FILTERS////////////////
+ const clientSort =plates=>{
+   
+   setPlates(plates)
+ }
+
+ const serverSort = sort=>{
+  axios.get("http://localhost:3003/dominos/sort/"+sort).then((res) => {
+    setPlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
+  });
+  
+}
+
+
+
+
   /////////Modal///////
 const hideModal =()=>{
   setShowEdit({});
@@ -55,7 +71,7 @@ const showModal = plate =>{
   return (
     <div className="App col top domino">
       <div className="domino__wrap">
-        <Header />
+        <Header serverSort={serverSort} plates={plates} clientSort={clientSort}/>
         <Create createPlate={createPlate} />
         <Bag plates={plates} showModal={showModal}></Bag>
         <Edit removePlate={removePlate} showEdit={showEdit} hideEdit={hideModal} editPlate={editPlate}/>
