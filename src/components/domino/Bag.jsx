@@ -1,11 +1,11 @@
 import Plate from "./Plate";
 
-function Bag({plates}){
+function Bag({plates, showModal}){
 
     return(
         <div className="domino__bag">
             {
-                plates.map((p,i) => <Plate key={i} plate={p}></Plate>)
+                plates.map((p,i) => <Plate key={i} plate={p} showModal={showModal}></Plate>)
             }
         </div>
 

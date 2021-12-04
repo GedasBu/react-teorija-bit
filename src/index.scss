@@ -110,6 +110,7 @@ code {
   }
 }
 .domino {
+  position: relative;
   &__wrap {
       display: flex;
       justify-content: center;
@@ -169,5 +170,37 @@ code {
       .plate {
           margin: 14px;
       }
+  }
+  &__modal{
+    position: absolute;
+    top: 40vh;
+    z-index: 5000;
+  }
+  &__edit {
+    background-color: $d_light;
+    width: 100%;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px ;
+    position: relative;
+    &__domino {
+        padding: 11px;
+    }
+    &__selects {
+        select {
+            margin: 0 13px;
+            outline: none;
+            border: 2px solid $d_green;
+            font-size: 26px;
+            border-radius: 4px;
+        }
+    }
+    h2 {
+        margin: 0;
+        color: $d_green;
+    }
   }
 }
