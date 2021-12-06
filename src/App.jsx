@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import Create from "./components/domino/Create";
 import Header from "./components/domino/Header";
 import Bag from "./components/domino/Bag";
@@ -8,19 +8,32 @@ import Edit from "./components/domino/Edit";
 function App() {
   const [plates, setPlates] = useState([]);
   const[updated, setUpdated] = useState(Date.now())
-  const [showEdit,setShowEdit] = useState({})
+  const [showEdit,setShowEdit] = useState({});
+  const [platesMaster, setPlatesMaster] = useState([]);
+  
 
 /////////SORTS AND FILTERS////////////////
  const clientSort =plates=>{
    
    setPlates(plates)
  }
+ const clientFilter =plates=>{
+   
+  setPlates(plates)
+}
 
  const serverSort = sort=>{
   axios.get("http://localhost:3003/dominos/sort/"+sort).then((res) => {
-    setPlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
+    savePlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
   });
   
+}
+
+const serverFilter = filter =>{
+  axios.get("http://localhost:3003/dominos/filter/"+filter).then((res) => {
+    setPlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
+  });
+
 }
 
 
@@ -53,8 +66,9 @@ const showModal = plate =>{
 
   useEffect(() => {
     axios.get("http://localhost:3003/dominos/").then((res) => {
-      setPlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
+      savePlates(res.data.dominos.map(p=>({id:p.id,left:p.left_side,right:p.right_side})));
     });
+  
   }, [updated]);
 
   const removePlate = plate=>{
@@ -66,12 +80,17 @@ const showModal = plate =>{
 
   }
 
-  
+  const savePlates = plates =>{
+    setPlates(plates);
+    setPlatesMaster(plates);
+  }
+
+ 
 
   return (
     <div className="App col top domino">
       <div className="domino__wrap">
-        <Header serverSort={serverSort} plates={plates} clientSort={clientSort}/>
+        <Header serverSort={serverSort} plates={platesMaster} clientSort={clientSort} clientFilter={clientFilter} serverFilter={serverFilter}/>
         <Create createPlate={createPlate} />
         <Bag plates={plates} showModal={showModal}></Bag>
         <Edit removePlate={removePlate} showEdit={showEdit} hideEdit={hideModal} editPlate={editPlate}/>

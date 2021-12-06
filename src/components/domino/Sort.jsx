@@ -63,7 +63,7 @@ const Sort = (props) => {
   //   }, [sortC]);
 
   return (
-    <div>
+    <>
       <div className="domino__header__sort">
         <h2>Client sort</h2>
         <select value={sortC} onChange={controlC}>
@@ -88,7 +88,7 @@ const Sort = (props) => {
           <option value="BD">Both side DSC</option>
         </select>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -182,6 +182,33 @@ app.get("/dominos/sort/:sort", (req, res) => {
     });
   });
 });
+app.get("/dominos/filter/:filter", (req, res) => {
+    let sql = `
+    SELECT *
+    FROM dices 
+    `;
+    let filterSQL='';
+    switch(req.params.filter) {
+        case 'SS':
+            filterSQL ='WHERE left_side= right_side';
+            break;
+            case 'ES':
+            filterSQL = 'WHERE left_side=0 OR right_side = 0';
+            break;
+            default:
+    }
+    sql +=filterSQL;
+    con.query(sql, (err, result) => {
+        if (err) {
+          throw err;
+        }
+        res.json({
+          msg: "OK",
+          dominos: result,
+        });
+      });
+
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
